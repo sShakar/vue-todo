@@ -1,0 +1,31 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/**/*.json"],
+  "exclude": ["src/**/__tests__/*"],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+  // "compilerOptions": {
+  //   "composite": true,
+  //   "useUnknownInCatchVariables": false,
+  //   "lib": [
+  //     "esnext",
+  //     "dom",
+  //     "dom.iterable"
+  //   ],
+  //   "baseUrl": ".",
+  //   "types": [
+  //     "dwt"
+  //   ],
+  //   "paths": {
+  //     "@/*": [
+  //       "./src/*"
+  //     ]
+  //   },
+  //   "ignoreDeprecations": "5.0"
+  // }
+}
