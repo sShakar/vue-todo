@@ -25,5 +25,6 @@ export const useTodoStore = defineStore('todo', {
                 this.todos[todoIndex].isDeleted = true;
             }
         }
+        //TODO: A function to compute deleted and finished item count
     }
 });

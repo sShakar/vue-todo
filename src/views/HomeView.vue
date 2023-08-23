@@ -1,3 +1,26 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import ExpandableList from '@/components/ExpandableList.vue';
+import { useTodoStore } from '@/stores/todo';
+
+const todoStore = useTodoStore();
+
+const newTodo = ref<string>('');
+const inception = ref<boolean>(false);
+
+function addTodo() {
+    if (!newTodo.value) {
+        inception.value = true;
+        return;
+    }
+
+    // store todo value into the state of the app.
+    todoStore.addTask(newTodo.value);
+
+    newTodo.value = '';
+}
+</script>
+
 <template>
     <main>
         <q-page class="q-ma-md q-gutter-md">
@@ -33,25 +56,7 @@
                 </div>
             </div>
 
-            <!-- expandable -->
-            <!-- :label="`completed tasks: ${todos.length}`" -->
-            <div class="q-pa-md flex justify-center">
-                <q-list bordered class="rounded-borders" style="max-width: 100%; width: 500px">
-                    <q-expansion-item
-                        expand-separator
-                        label="Completed Tasks"
-                        caption="A list of tasks finished"
-                    >
-                        <div v-for="todo in todoStore.todos" :key="todo.id">
-                            <q-item clickable v-ripple v-if="todo.isDone && !todo.isDeleted">
-                                <q-item-section>
-                                    <q-item-label lines="1">{{ todo.content }}</q-item-label>
-                                </q-item-section>
-                            </q-item>
-                        </div>
-                    </q-expansion-item>
-                </q-list>
-            </div>
+            <ExpandableList is-deleted-page />
 
             <q-dialog v-model="inception">
                 <q-card>
@@ -67,26 +72,3 @@
         </q-page>
     </main>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue';
-
-import { useTodoStore } from '@/stores/todo';
-
-const todoStore = useTodoStore();
-
-const newTodo = ref<string>('');
-const inception = ref<boolean>(false);
-
-function addTodo() {
-    if (!newTodo.value) {
-        inception.value = true;
-        return;
-    }
-
-    // store todo value into the state of the app.
-    todoStore.addTask(newTodo.value);
-
-    newTodo.value = '';
-}
-</script>
