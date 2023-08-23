@@ -1,5 +1,5 @@
-import type { Todo } from '@/types/todo';
 import { defineStore } from 'pinia';
+import type { Todo } from '@/types/todo';
 
 interface IState {
     todos: Todo[];
